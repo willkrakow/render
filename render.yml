@@ -1,0 +1,65 @@
+services:
+  # A Docker web service
+  - type: web
+    name: webdis
+    runtime: docker
+    repo: https://github.com/willkrakow/fathom-analytics
+    region: oregon # optional (defaults to oregon)
+    branch: master # optional (defaults to master)
+    envVars:
+      - key: FATHOM_GZIP
+        value: true
+      - key: FATHOM_DEBUG
+        value: false
+      - key: FATHOM_DATABASE_DRIVER
+        value: postgres
+      - key: FATHOM_DATABASE_NAME
+        fromDatabase:
+          name: "CamKow Analytics"
+          property: database
+      - key: FATHOM_DATABASE_USER
+        fromDatabase:
+          name: "CamKow Analytics"
+          property: user
+      - key: FATHOM_DATABASE_PASSWORD
+        fromDatabase:
+          name: "CamKow Analytics"
+          property: password
+      - key: FATHOM_DATABASE_HOST
+        fromDatabase:
+          name: "CamKow Analytics"
+          property: host
+      - key: FATHOM_SECRET
+        sync: false
+  # A Python cron job that runs every hour
+  - type: cron
+    name: talebygale-cron
+    runtime: node
+    schedule: "0 */8 * * *"
+    buildCommand: "npm install" # ensure it's a string
+    startCommand: tsx src/index.ts
+    repo: https://github.com/willkrakow/talebygale-cron
+    envVars:
+      - key: GHOST_API_KEY
+        sync: false
+      - key: GHOST_API_URL
+        value: https://atalebygale.ghost.io
+      - key: GHOST_CONTENT_API_KEY
+        sync: false
+      - key: LAURA_PHONE_NUMBER
+        value: +19199239882
+      - key: MY_PHONE_NUMBER
+        value: +19199239882
+      - key: NODE_VERSION
+        value: 18.12.1
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_PHONE_NUMBER
+        sync: false
+
+databases:
+  - name: CamKow Analytics
+    databaseName: atbg_analytics # optional (Render may add a suffix)
+    user: laura # optional
