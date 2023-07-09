@@ -34,7 +34,7 @@ services:
     name: talebygale-data
     runtime: image
     image:
-      url: https://github.com/nocodb/nocodb-seed
+      url: docker.io/nocodb/nocodb:latest
     envVars:
       - key: NC_DB
         fromDatabase:
