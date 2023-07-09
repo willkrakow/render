@@ -4,8 +4,7 @@ services:
     name: "CamKow Analytics Dashboard"
     runtime: docker
     repo: https://github.com/willkrakow/fathom-analytics
-    region: oregon # optional (defaults to oregon)
-    branch: master # optional (defaults to master)
+    branch: master
     envVars:
       - key: FATHOM_GZIP
         value: true
