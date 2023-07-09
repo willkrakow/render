@@ -30,6 +30,19 @@ services:
           property: host
       - key: FATHOM_SECRET
         sync: false
+  - type: web
+    name: talebygale-data
+    runtime: image
+    image:
+      url: https://github.com/nocodb/nocodb-seed
+    envVars:
+      - key: NC_DB
+        fromDatabase:
+          name: "TaleByGale"
+          property: connectionString
+      - key: PORT
+        value: 8080
+
   # A Python cron job that runs every hour
   - type: cron
     name: talebygale-cron
@@ -60,5 +73,8 @@ services:
 
 databases:
   - name: CamKow Analytics
-    databaseName: atbg_analytics # optional (Render may add a suffix)
-    user: laura # optional
+    databaseName: atbg_analytics
+    user: laura
+  - name: TaleByGale
+    databaseName: tale_by_gale
+    user: laura
