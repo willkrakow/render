@@ -51,6 +51,7 @@ services:
     envVars:
       - fromGroup: stripe-api
       - fromGroup: ghost-api
+      - fromGroup: nocodb-api
 
   # A Python cron job that runs every hour
   - type: cron
