@@ -49,6 +49,8 @@ services:
     buildCommand: "npm install"
     startCommand: "tsx src/index.ts"
     envVars:
+      - key: NODE_VERSION
+        value: 18.12.1
       - fromGroup: stripe-api
       - fromGroup: ghost-api
       - fromGroup: nocodb-api
@@ -62,24 +64,14 @@ services:
     startCommand: tsx src/index.ts
     repo: https://github.com/willkrakow/talebygale-cron
     envVars:
-      - key: GHOST_API_KEY
-        sync: false
-      - key: GHOST_API_URL
-        value: https://atalebygale.ghost.io
-      - key: GHOST_CONTENT_API_KEY
-        sync: false
       - key: LAURA_PHONE_NUMBER
         value: +19199239882
       - key: MY_PHONE_NUMBER
         value: +19199239882
       - key: NODE_VERSION
         value: 18.12.1
-      - key: TWILIO_ACCOUNT_SID
-        sync: false
-      - key: TWILIO_AUTH_TOKEN
-        sync: false
-      - key: TWILIO_PHONE_NUMBER
-        sync: false
+      - fromGroup: ghost-api
+      - fromGroup: twilio-api
 
 databases:
   - name: CamKow Analytics
@@ -104,6 +96,10 @@ envVarGroups:
         sync: false
       - key: STRIPE_WEBHOOK_SECRET
         sync: false
+      - key: STRIPE_SECRET_KEY__TEST
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET__TEST
+        sync: false
   - name: nocodb-api
     envVars:
       - key: NOCODB_API_KEY
@@ -114,3 +110,11 @@ envVarGroups:
         value: TaleByGale
       - key: NOCO_PROJECT
         value: p_7blljqhz7g4srs
+  - name: twilio-api
+    envVars:
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_PHONE_NUMBER
+        sync: false
