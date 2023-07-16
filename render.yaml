@@ -49,16 +49,8 @@ services:
     buildCommand: "npm install"
     startCommand: "tsx src/index.ts"
     envVars:
-      - key: GHOST_API_KEY
-        fromGroup: ghost-api
-      - key: GHOST_API_URL
-        fromGroup: ghost-api
-      - key: GHOST_CONTENT_API_KEY
-        fromGroup: ghost-api
-      - key: STRIPE_SECRET_KEY
-        fromGroup: stripe-api
-      - key: STRIPE_WEBHOOK_SECRET
-        fromGroup: stripe-api
+      - fromGroup: stripe-api
+      - fromGroup: ghost-api
 
   # A Python cron job that runs every hour
   - type: cron
