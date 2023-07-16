@@ -103,3 +103,13 @@ envVarGroups:
         sync: false
       - key: STRIPE_WEBHOOK_SECRET
         sync: false
+  - name: nocodb-api
+    envVars:
+      - key: NOCODB_API_KEY
+        sync: false
+      - key: NOCODB_API_URL
+        value: https://data.talebygale.com
+      - key: NOCO_ORG
+        value: TaleByGale
+      - key: NOCO_PROJECT
+        value: p_7blljqhz7g4srs
